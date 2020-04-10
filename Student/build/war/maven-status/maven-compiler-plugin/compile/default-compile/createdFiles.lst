@@ -1,0 +1,11 @@
+studentdb/UserDb.class
+studentmodel/User.class
+Student/project/IntegrationTest.class
+student/controllerWithoutDb/ChangePasswordTest.class
+student/controllerWithoutDb/LoginTest.class
+studentcontrollerWithoutDb/UserPasswordController.class
+studentcontrollerWithoutDb/UserRegisterController.class
+student/service/UserServiceTest.class
+student/controllerWithoutDb/RegisterTest.class
+studentcontrollerWithoutDb/UserLoginController.class
+studentservice/UserService.class

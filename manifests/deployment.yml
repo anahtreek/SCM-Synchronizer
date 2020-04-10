@@ -1,0 +1,16 @@
+apiVersion : apps/v1beta1
+kind: Deployment
+metadata:
+  name: student 
+spec:
+  replicas: 1
+  template:
+    metadata:
+      labels:
+        app: student 
+    spec:
+      containers:
+        - name: student 
+          image: digitalrig.azurecr.io/student
+          ports:
+          - containerPort: 32502

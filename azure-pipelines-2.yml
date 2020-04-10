@@ -1,0 +1,52 @@
+# Starter pipeline
+# Start with a minimal pipeline that you can customize to build and deploy your code.
+# Add steps that build, run tests, deploy, and more:
+# https://aka.ms/yaml
+
+# trigger:
+# - master
+
+pool:
+  vmImage: 'ubuntu-latest'
+
+steps:
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: './'
+    Contents: '**'
+    TargetFolder: 'AzRepo'
+    OverWrite: true
+  displayName: 'Pull latest code from Azure Repo'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      rm -rf .git
+      git clone https://anahtreek:birthday230295@github.com/anahtreek/SCM-Synchronizer.git
+  displayName: 'Pull latest code from Client Repo'
+
+- task: CopyFiles@2
+  inputs:
+    SourceFolder: './'
+    Contents: '**'
+    TargetFolder: 'SCM-Synchronizer'
+    OverWrite: true
+  displayName: 'Update Client Repo'
+
+- task: Bash@3
+  inputs:
+    targetType: 'inline'
+    script: |
+      cd SCM-Synchronizer
+      git config --global user.email "keerthana.n10@wipro.com"
+      git config --global user.name "anahtreek"
+      git remote -v
+      git remote remove origin
+      git remote add origin https://anahtreek:birthday230295@github.com/anahtreek/SCM-Synchronizer.git
+      git add .
+      git commit -m "Sync from Azure Repo"
+      git push -u origin master
+  displayName: 'Push to Client Repo'
+
+
